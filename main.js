@@ -1,7 +1,13 @@
 var http = require("http");
 var state = 10;
 http.createServer(function (request, response) {
-  if (request.url === "/" || request.url === "/state" || request.url === "/reset") {
+  if (request.url === "/" || request.url === "/state") {
+    response.writeHead(200, {'content-type' : 'text/plain'});
+    response.write("Current state is: " + state);
+    console.log(state);
+    response.end();
+  }
+  else if (request.url === "/reset") {
     response.writeHead(200, {'content-type' : 'text/plain'});
     response.write("Current state is: " + (state = 10));
     console.log(state);
@@ -25,4 +31,4 @@ http.createServer(function (request, response) {
     console.log(state);
     response.end();
   };
-}).listen(8080,console.log("server running at http://127.0.0.1:8080/"));
+}).listen(8080,console.log("server running at http://localhost:8080/"));
